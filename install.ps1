@@ -31,6 +31,10 @@ Write-Host "Setting up PowerShell" -ForegroundColor Yellow
 $profilePath = "$PSScriptRoot/profile.ps1"
 . "$PSScriptRoot/setup/powershell.ps1" -profilePath $profilePath
 
+# ShareX Setup
+Write-Host "Setting up ShareX" -ForegroundColor Yellow
+. "$PSScriptRoot/setup/sharex.ps1" -sharexHotkeysPath "$PSScriptRoot/sharex-hotkeys.json"
+
 Write-Host "Setup complete!" -ForegroundColor Green
 
 . $PROFILE -DotfilesPath $env:DOTFILES_PATH
