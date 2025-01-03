@@ -13,28 +13,7 @@ if ($currentPath -ne $desiredPath) {
 Write-Host "DOTFILES_PATH environment variable set to $env:DOTFILES_PATH" -ForegroundColor Green
 
 if (-not $NoInstallPackages) {
-    Write-Host "Installing packages..." -ForegroundColor Yellow
-    $packageIds = @(
-        "Git.Git",
-        "Neovim", 
-        "Microsoft.VisualStudioCode",
-        "Microsoft.PowerToys",
-        "Microsoft.PowerShell",
-        "JannDeDobbeleer.Oh-My-Posh",
-        "sharkdp.bat",
-        "jqlang.jq"
-    )
-
-    foreach ($packageId in $packageIds) {
-        Write-Host "Installing package: $packageId"
-        winget install $packageId --accept-package-agreements --silent
-
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "Successfully installed: $packageId"
-        } else {
-            Write-Host "Failed to install (or already installed): $packageId" -ForegroundColor Red
-        }
-    }
+    . "$PSScriptRoot/setup/install-packages.ps1"
 } else {
     Write-Host "Skipping package installation..." -ForegroundColor Yellow
 }
