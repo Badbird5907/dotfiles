@@ -1,7 +1,20 @@
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$sharexHotkeysPath
+    [string]$sharexHotkeysPath = "$env:DOTFILES_PATH/sharex-hotkeys.json"
 )
+
+# Check for admin privileges
+if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "Please run ./setup/sharex.ps1 as administrator." -ForegroundColor Red
+    exit 1
+}
+
+# Disable Windows + S hotkey
+$registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+if (-not (Test-Path -Path $registryPath)) {
+    New-Item -Path $registryPath -Force
+}
+Set-ItemProperty -Path $registryPath -Name "DisabledHotkeys" -Value "S" -Type String
+Write-Host "Disabled default windows + S hotkey" -ForegroundColor Green
 
 $folderPath = "$env:USERPROFILE/Documents/ShareX"
 if (-not (Test-Path $folderPath)) {
