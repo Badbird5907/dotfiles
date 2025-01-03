@@ -5,3 +5,4 @@ testvim=nvim $*
 ytdl=yt-dlp $*
 p=pnpm $*
 cat=bat $*
+python3=python $*
