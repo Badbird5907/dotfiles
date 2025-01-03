@@ -13,9 +13,10 @@ foreach ($macro in $macros) {
   $command = $macro.Split("=")[1]
   $command = $command.Replace("`$*", "").Trim()
   $command = $ExecutionContext.InvokeCommand.ExpandString($command)
-  if (!(Get-Alias $alias -ErrorAction SilentlyContinue)) {
-      New-Alias -Name $alias -Value $command
+  if ((Get-Alias $alias -ErrorAction SilentlyContinue)) {
+    Remove-Alias -Name $alias
   }
+  New-Alias -Name $alias -Value $command
 }
 
 oh-my-posh init pwsh --config "$env:DOTFILES_PATH\terminal-themes\bubblesextra.omp.json" | Invoke-Expression

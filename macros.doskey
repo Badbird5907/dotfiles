@@ -1,7 +1,6 @@
 vi=nvim $*
 vim=nvim $*
 neovim=nvim $*
-nv=nvim $*
 testvim=nvim $*
 ytdl=yt-dlp $*
 p=pnpm $*
