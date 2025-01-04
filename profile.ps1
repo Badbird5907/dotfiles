@@ -19,4 +19,6 @@ foreach ($macro in $macros) {
   New-Alias -Name $alias -Value $command
 }
 
+. "$env:DOTFILES_PATH\scripts\pwsh-funcs\batdiff.ps1"
+
 oh-my-posh init pwsh --config "$env:DOTFILES_PATH\terminal-themes\bubblesextra.omp.json" | Invoke-Expression

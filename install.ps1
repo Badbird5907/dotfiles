@@ -1,5 +1,6 @@
 param(
-    [switch]$NoInstallPackages
+    [switch]$NoInstallPackages,
+    [switch]$NoCygwin
 )
 Write-Host "Script running from $PSScriptRoot" -ForegroundColor Yellow
 Write-Host "Setting up environment variables..." -ForegroundColor Yellow
@@ -11,6 +12,8 @@ if ($currentPath -ne $desiredPath) {
     [System.Environment]::SetEnvironmentVariable("DOTFILES_PATH", $desiredPath, "User")
 }
 Write-Host "DOTFILES_PATH environment variable set to $env:DOTFILES_PATH" -ForegroundColor Green
+
+. "$PSScriptRoot/utils.ps1"
 
 if (-not $NoInstallPackages) {
     . "$PSScriptRoot/setup/install-packages.ps1"
@@ -34,6 +37,18 @@ $profilePath = "$PSScriptRoot/profile.ps1"
 # ShareX Setup
 Write-Host "Setting up ShareX" -ForegroundColor Yellow
 . "$PSScriptRoot/setup/sharex.ps1" -sharexHotkeysPath "$PSScriptRoot/sharex-hotkeys.json"
+
+# Cygwin Setup
+if (-not $NoCygwin) {
+    Write-Host "Setting up Cygwin" -ForegroundColor Yellow
+    . "$PSScriptRoot/setup/cygwin.ps1"
+} else {
+    Write-Host "Skipping Cygwin setup..." -ForegroundColor Yellow
+}
+
+# Path Setup
+Write-Host "Setting up PATH" -ForegroundColor Yellow
+. "$PSScriptRoot/setup/path.ps1"
 
 Write-Host "Setup complete!" -ForegroundColor Green
 
