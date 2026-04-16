@@ -6,7 +6,7 @@ Write-Host "Script running from $PSScriptRoot" -ForegroundColor Yellow
 Write-Host "Setting up environment variables..." -ForegroundColor Yellow
 $currentPath = [System.Environment]::GetEnvironmentVariable("DOTFILES_PATH", "User")
 $desiredPath = "$env:USERPROFILE\dotfiles"
-$env:DOTFILES_PATH = $desiredPatht
+$env:DOTFILES_PATH = $desiredPath
 
 if ($currentPath -ne $desiredPath) {
     [System.Environment]::SetEnvironmentVariable("DOTFILES_PATH", $desiredPath, "User")

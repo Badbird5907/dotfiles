@@ -5,6 +5,7 @@ $packageIds = @(
     "Microsoft.VisualStudioCode",
     "Microsoft.PowerToys",
     "Microsoft.PowerShell",
+    "Schniz.fnm",
     "JannDeDobbeleer.Oh-My-Posh",
     "sharkdp.bat",
     "jqlang.jq",
@@ -14,7 +15,7 @@ $packageIds = @(
 
 foreach ($packageId in $packageIds) {
     Write-Host "Installing package: $packageId"
-    winget install $packageId --accept-package-agreements --silent
+    winget install $packageId --accept-package-agreements --accept-source-agreements --silent
 
     if ($LASTEXITCODE -eq 0) {
         Write-Host "Successfully installed: $packageId"
