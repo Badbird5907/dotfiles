@@ -20,5 +20,9 @@ foreach ($macro in $macros) {
 }
 
 . "$env:DOTFILES_PATH\scripts\pwsh-funcs\batdiff.ps1"
+. "$env:DOTFILES_PATH\scripts\pwsh-funcs\rmrf.ps1"
+. "$env:DOTFILES_PATH\scripts\pwsh-funcs\signal.ps1"
+
+fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
 
 oh-my-posh init pwsh --config "$env:DOTFILES_PATH\terminal-themes\bubblesextra.omp.json" | Invoke-Expression
